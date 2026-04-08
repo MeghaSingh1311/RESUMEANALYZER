@@ -19,19 +19,26 @@ A full-stack application that analyzes resumes against job descriptions using a 
 ```bash
 cd backend
 python -m venv venv
+# Activate the virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
 # Install dependencies
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-### 3. Database & Server (Direct Execution)
-You do NOT need to activate the virtual environment. Use Python directly:
+### 3. Database & Server
 ```bash
-# Run migrations
-python backend/manage.py migrate
+# Run migrations (from backend directory)
+cd backend
+# Set PYTHONPATH to parent directory
+export PYTHONPATH=..
+# On Windows PowerShell: $env:PYTHONPATH = ".."
+python manage.py migrate
 
 # Start the server
-python backend/manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
 ```
 The backend will run at `http://localhost:8000`.
 
