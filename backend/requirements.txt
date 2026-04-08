@@ -1,4 +1,0 @@
-django>=5.0
-django-cors-headers
-PyPDF2
-python-docx
