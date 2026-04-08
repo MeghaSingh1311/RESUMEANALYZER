@@ -44,7 +44,54 @@ The backend will run at `http://localhost:8000`.
 
 ---
 
-## Frontend Setup (React)
+## Running the Application
+
+### Backend
+```bash
+cd backend
+# Activate the virtual environment
+venv\Scripts\activate  # On Windows
+# source venv/bin/activate  # On macOS/Linux
+export PYTHONPATH=..
+python manage.py runserver 0.0.0.0:8000
+```
+
+### Frontend
+```bash
+cd frontend
+npm run dev
+```
+The frontend will run at `http://localhost:5173`.
+
+---
+
+## Deployment
+
+### Backend (Django) on Render
+
+1. Create a new Web Service on Render, connecting your GitHub repository.
+2. Set the **Root Directory** to `backend` (this is where `manage.py` is located).
+3. Configure the build settings:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python manage.py migrate && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
+4. Add environment variables if needed (e.g., `DJANGO_SETTINGS_MODULE=backend.settings`).
+5. Deploy the service.
+
+### Frontend (React) on Render
+
+1. Create a new Static Site on Render.
+2. Set the **Root Directory** to `frontend`.
+3. Configure the build settings:
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `dist`
+4. Add environment variable: `VITE_API_BASE_URL` set to your backend's Render URL (e.g., `https://your-backend.onrender.com`).
+5. Deploy the site.
+
+Ensure CORS is properly configured in Django settings for the frontend URL.
+
+---
+
+## Key Features & Integration
 
 ### 1. Prerequisites
 - Node.js (v18+)
